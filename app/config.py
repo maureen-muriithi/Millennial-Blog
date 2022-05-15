@@ -1,3 +1,5 @@
+import os
+
 class Config:
     '''
     General configuration parent class
@@ -6,6 +8,13 @@ class Config:
     SECRET_KEY = 'secretkey'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+    #  email configurations
+    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
+    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
 
 

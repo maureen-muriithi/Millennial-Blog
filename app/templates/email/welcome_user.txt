@@ -1,0 +1,5 @@
+Hello {{user.username}}
+Welcome to Milllennial Blogs.
+We have just seen you have signed up for our application and want to welcome you to the family. Please enjoy the various blogs from different people.
+Feel free to add your own blog and like or leave a comment for any other blogs that interest you.
+Thank you!
