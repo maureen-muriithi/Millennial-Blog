@@ -1,0 +1,32 @@
+body{
+    background-color: #1d5c96;
+    color: #7db0de;
+    text-align: center;
+}
+
+#intro{
+    font-size: 80px;
+    color: #12395d;
+    font-weight: 900;
+    text-shadow: #7db0de;
+    margin-top: 40%;
+}
+
+.intro-p{
+    font-size: 50px;
+    text-align: center;
+}
+
+#start-btn{
+    background-color:#12395d;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
