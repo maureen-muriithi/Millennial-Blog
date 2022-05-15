@@ -3,7 +3,7 @@ from flask import render_template,request, redirect, url_for, abort
 from flask_login import login_required
 from ..models import User, Blog
 from .forms import UpdateProfile, AddBlog
-from .. import db
+from .. import db, photos
 
 @main.route('/')
 def index():
@@ -42,6 +42,17 @@ def update_profile(username):
         return redirect(url_for('.profile',username=user.username))
 
     return render_template('profile/update.html',update_form =update_form)
+
+@main.route('/user/<username>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(username):
+    user = User.query.filter_by(username = username).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for('main.profile',username=username))
 
 @main.route('/blogs')
 def blogs():
