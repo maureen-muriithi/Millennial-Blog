@@ -1,5 +1,6 @@
 from . import main
 from flask import render_template,request, redirect, url_for
+from flask_login import login_required
 
 @main.route('/')
 def index():
@@ -10,6 +11,7 @@ def index():
     return render_template('index.html', title=title, )
 
 @main.route('/profile')
+@login_required
 def profile():
 
     title = 'your profile page'
