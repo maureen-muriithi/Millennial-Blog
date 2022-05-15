@@ -1,3 +1,15 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro%}
+
+{% block styles %} 
+  {{ super() }}
+  <!-- Bootstrap CSS/ index CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" >
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+{% endblock %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,16 +18,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
-
   </head>
   <body>
+    {% block content%}
+      <br> <br> <br>
       <h1 id="intro">Welcome to Millennial Blogs!!</h1>
-      <p class="intro-p">Read and comment about the latest trends, stories, opinions, experiences and details about literally anything, from different people, including different facets of life.</p>
-      <p class="intro-p">Further, Share your blogs, personal experiences, your perspectives or anything else you'd prefer.</p>
-      <button id="start-btn">Let's get started.</button>
+      <p class="intro-p" style="font-size: 40px;">Read and comment about the latest trends, stories, opinions, experiences and details about literally anything, from different people, including different facets of life.</p>
+      <p class="intro-p" style="font-size: 40px;">Further, Share your blogs, personal experiences, your perspectives or anything else you'd prefer.</p>
+      <button id="start-btn">LET'S GET STARTED.</button>
+
+    {% endblock %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
