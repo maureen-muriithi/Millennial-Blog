@@ -12,7 +12,8 @@
             </ul>
         <ul class="navbar-nav ml-auto" style="font-size: 1.8rem;">
             {% if current_user.is_authenticated %}
-
+            <li class="nav-item"><a class="nav-link fw-bold" href="{{url_for('main.new_blog')}}" style="color: white; margin-right:30px; ">New Blog</a>
+            </li>
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" style= 'margin-right:30px;' data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">

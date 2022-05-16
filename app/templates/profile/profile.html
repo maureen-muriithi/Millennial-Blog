@@ -1,19 +1,21 @@
-{% extends 'base.html'%}
-{% import 'bootstrap/wtf.html' as wtf %}
+
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" >
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
 
+{% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf %}
+
 {% block navbar %}
   {% include 'navbar.html' %}
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid" style="background-color: #7db0de; color: #1d5c96;">
+<div class="container" style="background-color: #7db0de; color: #1d5c96;">
   <h1 class="text-center" style="font-size: 60px;" >Your Profile</h1>
-  <div class="row container text-center justify-content-center" style="background-color: #123951; margin-left: 10%; padding: 10px;" >
+  <div class="row container text-center justify-content-center" style="background-color: #123951;" >
     <div class="col-md-12"></div>
         <div class="content-section mt-4">
             {% for message in get_flashed_messages() %}
@@ -36,7 +38,7 @@
           <img src="{{profile_pic_path}}" class="rounded-circle account-img mt-2" alt="default avatar">
         {% endif %}
       </div>
-      <div class="card-body">
+      <div class="card-body" style="background-color: #123951;" >
         <h4 class="card-title text-center" style="color:white; font-size: 40px;">{{current_user.username|title}}</h4>
         <hr>
         <p style="color:white; font-size: 20px;" > Email: {{current_user.email}} </p>
@@ -44,7 +46,7 @@
        </div>
        <div">
         {% if user == current_user %}
-          <button class="btn btn-sm btn-info" id="update-btn" type="submit" > <a href="{{url_for('main.update_profile',username=user.username)}}"> Update Your Profile</a> 
+          <button class="btn btn-sm btn-info" style="border-radius: 30px; color: white; padding: 15px; display: inline-block; font-size: 18px; margin: 4px 2px; cursor: pointer;text-align: center;" id="update-btn" type="submit" > <a href="{{url_for('main.update_profile',username=user.username)}}"> Update Your Profile</a> 
         {% endif %}
       </div>
     </div>
@@ -52,21 +54,29 @@
 
   <div class="row">
     <div class="container col-md-12"></div>
-    <div class="col-lg-12" id="user">
-      {% if current_user %}
-      <h3 class="text-center fw-bolder p-3 text-decoration-underline border text-info rounded-3" style="background: black">You have {{user.blogs.count()}} Blogs</h3>
-      {% for i in posts%}
-      <div class="blogs text-center text-white my-3">
-        <h5 class="text-info my-3 fw-bold">Title: {{i.title}}</h5>
-        <h6 class="text-light">{{i.post}}</h6>
-        <p class="text-warning">{{i.comment.count()}} Comments</p>
-      </div>
-      {%endfor%} 
-      {%else%}
-      <h3 class="text-center fw-bolder p-3 text-decoration-underline border text-info rounded-3" style="background: black">You have {{user.blogs.count()}} Blogs</h3>
-      {%endif%}
-    </div>
-  </div> 
+			<div class="col-lg-12" id="user">
+				{% if current_user %}
+				<h3
+					class="text-center fw-bolder p-3 text-decoration-underline border text-info rounded-3"
+					style="background: #123951; height:40px"
+					>You have {{user.blogs.count()}} Blogs</h3
+				>
+				{% for i in posts%}
+				<div class="blogs text-center text-white my-3" style="font-size: 20px ;">
+					<h5  style="font-size: 30px; color: white;" >Title: {{i.title}}</h5>
+					<h6 class="text-light" style="font-size: 20px"  >{{i.post}}</h6>
+					<p class="text-warning">{{i.comment.count()}} Comments</p>
+          <br>
+				</div>
+
+				{%endfor%} {%else%}
+				<h3>You have no blogs</h3>
+				{%endif%}
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock %}
- 
+Maureen Muriithi
+© 2022 GitHub, Inc.
+Terms

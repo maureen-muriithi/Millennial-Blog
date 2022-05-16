@@ -1,9 +1,14 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" >
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+
 {% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
 <div class="container-fluid;">
-  <div class="row container justify-content-center" style="background-color: #123951; font-size: 24px; color: #1d5c96; margin-left: 10%; margin-top: 10%; padding: 100px;">
+  <div class="row container justify-content-center" style="background-color: #123951; font-size: 24px; color: #1d5c96; margin-left: 10%; margin-top: 10%; padding: 70px;">
   
     {{wtf.quick_form(update_form)}}
     {% if user == current_user %}

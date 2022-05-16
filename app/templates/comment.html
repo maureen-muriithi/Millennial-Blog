@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" >
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+
+{% extends 'base.html'%}
+ {% import 'bootstrap/wtf.html' as wtf %}
+  {% block content %}
+    <div class="container" style="background-color: #12395d; padding: 100px; " id="allcomments">
+        <div class="row" style="background-color: #12395d ;">
+            {% if all_comments %}
+            <div class="col-md-12 commentform text-info" style="font-size: 40px;">
+                {{wtf.quick_form(form)}}
+            </div>
+            <div class="col-md-12 justify-content-center">
+                <h3 class="text-center text-info" id="coms">All comments for the post</h3>
+                {% for comment in all_comments %}
+                <div class="card w-70 mb-4 text-info justify-content-center" style="background-color: white;" >
+                    <div class="card-body">
+                        <p class="card-title" style="font-size: 20px;">{{ comment.comment }}</p>
+                        <p class="card-text" style="font-size: 20px;" >--- {{comment.user.username}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {%else%}
+        <div class="card w-90 mb-3" style="background-color: aquamarine; margin-left: 35%; padding: 5px; font-size: 2.5rem;">
+            <div class="card-body" style="background-color: aquamarine;">
+                <p class="card-title text-info">Be the first to comment</p>
+            </div>
+        </div>
+        <br><br><br>
+        <div class="col-md-12 text-info " style="font-size: 40px;" > {{wtf.quick_form(form)}} </div>
+        {%endif%}
+    </div>
+    
+    {% endblock%}
+
+    

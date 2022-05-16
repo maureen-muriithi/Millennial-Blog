@@ -109,7 +109,7 @@ class Subscribers(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(255), unique = True, index = True)
 
-    def save_subscriber(self):
+    def save(self):
         db.session.add(self)
         db.session.commit()
 
@@ -126,7 +126,7 @@ class Upvote(db.Model):
     blog_id = db.Column(db.Integer,db.ForeignKey('blogs.id'))
     
 
-    def save_upvote(self):
+    def save(self):
         db.session.add(self)
         db.session.commit()
 

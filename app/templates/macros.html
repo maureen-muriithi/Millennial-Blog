@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" >
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+
+{% macro displayblogs(blogs) %}
+
+    <div class="container-fluid" style="background-color: #12395d !important;">
+        <div class="row">
+            {% if blogs %}
+            <div class="container">
+                {% for blog in blogs %}
+                <article class="media content-section  my-3 mx-auto"  style="background-color: #12395d !important; color:white !important; width:60vw !important; padding-right: 50px;">
+                    <div class="media-body">
+                            <span>
+                                <img src="{{url_for('static', filename='photos/' + blog.user.profile_pic_path) }}" alt="" class="rounded-circle article-img" style="border-radius: 50%; width: 100px;">
+                            </span>
+                        <div class="article-metadata">
+                            <!-- <a class="mr-2" href="#" style="color: aqua;" >{{ blog.user.username }}</a> -->
+                        </div>
+                        <h1><a class="article-title fw-bold" href="{{url_for('main.blog', blog_id=blog.id)}}"  style="color: white!important; font-size: 50px; font-weight: 500;">{{ blog.title }}</a></h1>
+                        <p class="article-content" style="font-size: 25px;" >{{ blog.post | truncate(150)}} <a href="{{url_for('main.blog', blog_id=blog.id)}}" style="color:cyan; font-size: 20px;"> [Read more]</a> </p>
+                            <footer class="blockquote-footer text-center" style="color:cyan; font-size: 25px;"> Posted by: {{blog.user.username}} <br>
+                                <small class="text-muted" style="color:green !important; font-size: 20px;"> Date: {{ blog.date_posted.strftime('%Y-%m-%d') }}</small>
+
+                            </footer>
+                                    <div>
+                                        <span class="foot" style="font-size: 20px ;" >{{blog.comment.count()}} Comments
+
+                                        </span> 
+                                        <span class="foot" style="font-size: 30px;" > <a href="{{url_for('main.like',id = blog.id)}}"> <i class="fa fa-thumbs-o-up" style="font-size:36px; color:blue"></i> {{blog.upvote.count()}} </a>
+                                        </span>
+                                        
+                                        
+                                        <span class="foot" style="font-size: 30px;" > 
+                                            <a href="{{url_for('main.dislike',id = blog.id)}}"><i class="fa fa-thumbs-o-down" style="font-size:36px; color:red"></i> {{blog.downvote.count()}} </a> 
+                                        </span>
+                                    </div>
+                
+                                    <a href="{{url_for('main.comment',blog_id = blog.id)}}" class="btn btn-info btn-sm" style="height: 40px; width: 150px; font-size: 1.8rem;"> Comment</a>
+                                    <br>
+                                    <hr style="background-color: white; height: 6px;">
+                                    <hr style="background-color: navy; height: 6px;">
+
+
+                                </div>
+
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}

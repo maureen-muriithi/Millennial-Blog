@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% import 'macros.html' as macro%}
+{% import 'macros.html' as macro %}
 
 {% block styles %} 
   {{ super() }}
@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" >
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
 {% endblock %}
 
@@ -23,14 +24,40 @@
     {% block content%}
 
     <div class="jumbotron jumbotron-fluid" style="height: 500px; background-image: url('https://images.unsplash.com/photo-1651761129862-13beec5afece?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MjF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60'); background-repeat: no-repeat; background-size: 100% 500px;">
-      <h1 class="display-4">Welcome to Millennial Blogs!!</h1>
-      <p class="lead intro-p">Read and comment about the latest trends, stories, opinions, experiences and details about literally anything, from different people, including different facets of life.</p>
-      <hr class="my-4" style="height: 4px; width: 80%; background-color: #12395d">
-      <p class="intro-p" >Share your blogs, personal experiences, your perspectives or anything else you'd prefer.</p>
+      <h1 class="display-4" style="font-size: 80px; font-weight: 700; text-shadow: white; ">Welcome to Millennial Blogs!!</h1>
+      <p class="lead intro-p" style="font-size: 25px; font-weight: 500;" >Read, share and comment about the latest trends, stories, opinions, experiences and details about literally anything, from different people, including different facets of life.</p>
+      <br><br><br>
+      <hr class="my-4" style="height: 10px; width: 80%; background-color: #12395d">
+      <br><br><br><br><br>
       <p class="lead">
-        <a class="btn btn-primary btn-lg" id="start-btn" href="#" role="button">LET'S GET STARTED.</a>
+        {% if current_user.is_authenticated %}
+        <a class="btn btn-primary btn-lg" id="start-btn" href="{{url_for('main.new_blog')}}" role="button">LET'S GET STARTED.</a>
+        {% else %}
+        <a class="btn btn-primary btn-lg" style="margin:30px ;" id="start-btn" href="{{url_for('auth.register')}}" role="button">LET'S GET STARTED.</a>
+        <div class="content-section mt-4">
+          {% for message in get_flashed_messages() %}
+          <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
       </p>
     </div>
+
+    <div class="container" >
+      <h2 class="text-center" style="color:#1d5c96; font-size: 30px; font-weight: 500;">Quotes of the day</h2>
+			<figure class="text-center">
+				<blockquote class="blockquote">
+					<p style="color: black; font-size: 25px; font-style: italic; font-weight: 300;" >{{quote.quote }}</p>
+				</blockquote>
+				<figcaption class="blockquote-footer">
+					<cite title="Source Title" style="color: blue; font-size: 30px; font-style: italic; font-weight: 200;" > ~{{quote.author}}</cite>
+				</figcaption>
+			</figure>
+		</div>
+
+    <div class="container" style="font-size: 30px;"> {{ macro.displayblogs(blogs) }} </div>
     
       
 
