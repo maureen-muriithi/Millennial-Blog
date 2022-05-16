@@ -9,15 +9,16 @@ body{
     color: #12395d;
     font-weight: 900;
     text-shadow: #7db0de;
-    margin-top: 40%;
+    margin-top: 20%;
 }
 
 .intro-p{
     font-size: 40px;
     text-align: center;
+    font-weight: 500;
 }
 
-#start-btn{
+#start-btn, #update-btn{
     background-color:#12395d;
     border: none;
     border-radius: 30px;

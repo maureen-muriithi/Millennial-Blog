@@ -1,12 +1,20 @@
-<h1>Your Profile Details</h1>
 {% extends 'base.html'%}
 {% import 'bootstrap/wtf.html' as wtf %}
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" >
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-4 black">
+<div class="container-fluid" style="background-color: #7db0de; color: #1d5c96;">
+  <h1 class="text-center" style="font-size: 60px;" >Your Profile</h1>
+  <div class="row container text-center justify-content-center" style="background-color: #123951; margin-left: 10%; padding: 10px;" >
+    <div class="col-md-12"></div>
         <div class="content-section mt-4">
             {% for message in get_flashed_messages() %}
             <div class="alert alert-success">
@@ -19,49 +27,46 @@
                 <span class="text-danger">{{ error }}</span></br>
               {% endfor %}
             {%endif%}
-    <div class="card testimonial-card">
-    <div class="card-up indigo lighten-1"></div>
-    <div class="avatar mx-auto white">
-      <img src="{{profile_pic_path}}" class="rounded-circle account-img mt-2" alt="woman avatar">
-    </div>
-    <div class="card-body">
-      <h4 class="card-title text-center">{{current_user.username|title}}</h4>
-      <hr>
-      <p> {{current_user.email}} </p>
-      <p><i class="fas fa-quote-left"></i> {{current_user.bio}} <i class="fas fa-quote-right"></i> </p>
-      <button class="btn btn-sm btn-info" id="showform"> Update Profile</button>
-    </div>
-      
+      <div class="card testimonial-card justify-content-center" >
+      <div class="card-up indigo lighten-1"></div>
+      <div class="avatar mx-auto white" style='margin-right: 5.5%;'>
+        {% if user.profile_pic_path %}
+          <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">    
+        {%else%}
+          <img src="{{profile_pic_path}}" class="rounded-circle account-img mt-2" alt="default avatar">
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <h4 class="card-title text-center" style="color:white; font-size: 40px;">{{current_user.username|title}}</h4>
+        <hr>
+        <p style="color:white; font-size: 20px;" > Email: {{current_user.email}} </p>
+        <p style="color:white; font-size: 20px;" ><i class="fas fa-quote-left"></i> Bio: {{current_user.bio}} <i class="fas fa-quote-right"></i> </p>
+       </div>
+       <div">
+        {% if user == current_user %}
+          <button class="btn btn-sm btn-info" id="update-btn" type="submit" > <a href="{{url_for('main.update_profile',username=user.username)}}"> Update Your Profile</a> 
+        {% endif %}
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-      <div class="container mt-4" >
-        <div id="profileupdate">
-          <h2>Update Your Profile</h2>
-            {% if user == current_user %}
-                <a href="{{url_for('main.update_profile',username=user.username)}}">Update Your Profile</a>
-            {% endif %}
-            <div class="col-md-4">
-             {% if user.profile_pic_path %}
-            
-                <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
-            
-            {%else%}
-                <p>No profile picture</p>
-            
-            {% endif %}
-            
-            {% if user == current_user %}
-                <form  action="{{url_for('main.update_pic',username=user.username)}}" method="post" enctype = "multipart/form-data">
-            
-                  <input type="file"  name="photo" class="form-control" required>
-                  <input type="submit">
-                </form>
-            {% endif %}
-              </div>
-        </div>
+
+  <div class="row">
+    <div class="container col-md-12"></div>
+    <div class="col-lg-12" id="user">
+      {% if current_user %}
+      <h3 class="text-center fw-bolder p-3 text-decoration-underline border text-info rounded-3" style="background: black">You have {{user.blogs.count()}} Blogs</h3>
+      {% for i in posts%}
+      <div class="blogs text-center text-white my-3">
+        <h5 class="text-info my-3 fw-bold">Title: {{i.title}}</h5>
+        <h6 class="text-light">{{i.post}}</h6>
+        <p class="text-warning">{{i.comment.count()}} Comments</p>
       </div>
-  </div>
+      {%endfor%} 
+      {%else%}
+      <h3 class="text-center fw-bolder p-3 text-decoration-underline border text-info rounded-3" style="background: black">You have {{user.blogs.count()}} Blogs</h3>
+      {%endif%}
+    </div>
+  </div> 
 </div>
 {% endblock %}
+ 
