@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" >
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
 
 {% extends 'base.html'%}
@@ -20,6 +21,10 @@
                     <div class="card-body">
                         <p class="card-title" style="font-size: 20px;">{{ comment.comment }}</p>
                         <p class="card-text" style="font-size: 20px;" >--- {{comment.user.username}}</p>
+                        <form action="{{ url_for('main.delete_comment', id=blog.id, comment_id=comment.id) }}">
+                            <input class="btn btn-danger" type="reset" value="Delete">
+                            <button style='font-size:18px; color:blue'>Like <i class='fas fa-thumbs-up'></i></button>
+                          </form>
                     </div>
                 </div>
                 {% endfor %}

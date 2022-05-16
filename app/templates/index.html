@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" >
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
 {% endblock %}
 
@@ -49,7 +50,7 @@
       <h2 class="text-center" style="color:#1d5c96; font-size: 30px; font-weight: 500;">Quotes of the day</h2>
 			<figure class="text-center">
 				<blockquote class="blockquote">
-					<p style="color: black; font-size: 25px; font-style: italic; font-weight: 300;" >{{quote.quote }}</p>
+					<p style="color: black; font-size: 25px; font-style: italic; font-weight: 300;"> <i class="fas fa-quote-left" style="color:#12395d;" ></i> <em>{{quote.quote}}</em> <i class="fas fa-quote-right" style="color: #12395d;" ></i></p>
 				</blockquote>
 				<figcaption class="blockquote-footer">
 					<cite title="Source Title" style="color: blue; font-size: 30px; font-style: italic; font-weight: 200;" > ~{{quote.author}}</cite>
