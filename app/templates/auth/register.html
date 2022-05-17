@@ -1,11 +1,18 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" >
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+
 {% extends 'base.html'%}
 {% import 'bootstrap/wtf.html' as wtf%}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
+    <div class="container-fluid" style="background-color: #7db0de; font-size: 20px; ">
+        <div class="row" >
             <div class="col-md-3"> </div>
-            <div class="col-md-6" id="register">
+            <div class="col-md-6"  style="background-color: #123951 !important; padding: 80px; margin: 20px; color: white; " id="register">
                 {% for error in errors %}
                     {% if errors %}
                         <div class="alert alert-danger">
@@ -13,7 +20,7 @@
                         </div>
                     {% endif %}
                 {% endfor %}
-                <h3 class="text-center"><i class="fas fa-user-plus"></i></i>&nbsp; <strong>Sign Up</strong></h3>
+                <h3 class="text-center" style="font-size: 30px;" ><i class="fas fa-user-plus"></i></i>&nbsp; <strong>Sign Up</strong></h3>
                 {{ wtf.quick_form(register_form) }}
             </div>
             <div class="col-md-3"></div>
