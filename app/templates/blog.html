@@ -38,8 +38,7 @@
                     </span>
                </div>
                <a href="{{url_for('main.comment',blog_id = blog.id)}}" class="btn btn-info btn-xxl"> Comment</a>
-               <a href="{{url_for('main.blog', blog_id=blog.id)}}"  class="btn btn-info btn-xxl"> Edit Blog</a>
-
+               <a href="{{url_for('main.edit_blog', blog_id=blog.id)}}" class="btn btn-info btn-xxl"> Edit Blog</a>
                <a href="{{url_for('main.delete_blog', blog_id = blog.id)}}"  class="btn btn-danger btn-xxl"> Delete</a>
 
                

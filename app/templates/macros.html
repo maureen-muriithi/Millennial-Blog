@@ -39,7 +39,9 @@
                                     </div>
                 
                                     <a href="{{url_for('main.comment',blog_id = blog.id)}}" class="btn btn-info btn-sm" style="height: 40px; width: 150px; font-size: 1.8rem;"> Comment</a>
-                                    <a href="{{url_for('main.edit_blog', blog_id=blog.id)}}"  class="btn btn-info btn-sm" style="height: 40px; width: 150px; font-size: 1.8rem;"> EDIT</a>
+                                    <a href="{{url_for('main.edit_blog', blog_id=blog.id)}}"  class="btn btn-info btn-sm" style="height: 40px; width: 150px; font-size: 1.8rem;"> EDIT BLOG</a>
+                                    <a href="{{url_for('main.delete_blog', blog_id = blog.id)}}" class="btn btn-info btn-sm" style="height: 40px; width: 150px; font-size: 1.8rem;"> DELETE</a>
+
 
                                     <br>
                                     <hr style="background-color: white; height: 6px;">
