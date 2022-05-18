@@ -1,8 +1,9 @@
+from crypt import methods
 from . import main
 from flask import render_template, request, redirect, url_for, abort, flash
 from flask_login import login_required, current_user
 from ..models import User, Blog, Comment, Subscribers, Upvote, Downvote
-from .forms import UpdateProfile, AddBlog, CommentForm
+from .forms import UpdateProfile, AddBlog, CommentForm, BlogEditForm
 from .. import db, photos
 from ..request import get_quote
 from ..email import mail_message
@@ -120,13 +121,46 @@ def comment(blog_id):
         return redirect(url_for('.comment', blog_id = blog_id))
     return render_template('comment.html', form =form, blog = blog, all_comments=all_comments)
 
-@main.route("/blog/<int:id>/<int:comment_id>/delete")
+@main.route("/blog/<int:blog_id>/edit", methods = ["POST", "GET"])
+@login_required
+def edit_blog(blog_id):
+    blog = Blog.query.filter_by(id = blog_id).first()
+    edit_form = BlogEditForm()
+
+    if edit_form.validate_on_submit():
+        blog.title = edit_form.title.data
+        edit_form.title.data = ""
+        blog.post = edit_form.post.data
+        edit_form.post.data = ""
+
+        db.session.add(blog)
+        db.session.commit()
+        return redirect(url_for("main.blog", blog_id = blog_id))
+
+    return render_template("edit_blog.html", blog = blog, edit_form = edit_form)
+
+@main.route("/blog/<int:id>/<int:comment_id>/delete", methods=['GET', 'DELETE'])
 def delete_comment(id, comment_id):
     blog = Blog.query.filter_by(id = id).first()
     comment = Comment.query.filter_by(id = comment_id).first()
-    db.session.remove()
+    db.session.delete(comment)
     db.session.commit()
+    flash("Comment deleted successfully!!")
     return redirect(url_for("main.comment", blog_id = blog.id))
+
+@main.route('/delete/<int:blog_id>', methods=['GET', 'DELETE'])
+@login_required
+def delete_blog(blog_id):
+    deleted_blog = Blog.query.filter_by(id=blog_id).first()
+    if deleted_blog:
+        db.session.delete(deleted_blog)
+        db.session.commit()
+        flash("Blog deleted successfully!!")
+        return redirect (url_for('main.index'))
+    else:
+        flash("Whoops there was a problem with the deletion. Please try again")
+    return redirect(url_for('main.blog'))
+
 
 
 

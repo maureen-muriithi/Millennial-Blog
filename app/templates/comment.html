@@ -22,7 +22,7 @@
                         <p class="card-title" style="font-size: 20px;">{{ comment.comment }}</p>
                         <p class="card-text" style="font-size: 20px;" >--- {{comment.user.username}}</p>
                         <form action="{{ url_for('main.delete_comment', id=blog.id, comment_id=comment.id) }}">
-                            <input class="btn btn-danger" type="reset" value="Delete">
+                            <input class="btn btn-danger" type="submit" value="Delete">
                             <button style='font-size:18px; color:blue'>Like <i class='fas fa-thumbs-up'></i></button>
                           </form>
                     </div>

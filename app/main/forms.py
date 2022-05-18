@@ -1,3 +1,4 @@
+from re import sub
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired, Email
 from flask_login import current_user
@@ -24,3 +25,8 @@ class AddBlog(FlaskForm):
 class CommentForm(FlaskForm):
     comment = TextAreaField("Post a Comment", validators=[DataRequired()])
     submit = SubmitField("Comment")
+
+class BlogEditForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    post = TextAreaField('Blog content', validators=[DataRequired()])
+    submit = SubmitField('Post', validators=[DataRequired()])

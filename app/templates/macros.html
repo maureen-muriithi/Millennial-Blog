@@ -6,12 +6,12 @@
 
 {% macro displayblogs(blogs) %}
 
-    <div class="container-fluid" style="background-color: #12395d !important;">
+    <div class="container" style="background-color: #12395d !important;">
         <div class="row">
             {% if blogs %}
             <div class="container">
                 {% for blog in blogs %}
-                <article class="media content-section  my-3 mx-auto"  style="background-color: #12395d !important; color:white !important; width:60vw !important; padding-right: 50px;">
+                <article class="media content-section  my-3 mx-auto"  style="background-color: #12395d !important; color:white !important; width:60vw !important;">
                     <div class="media-body">
                             <span>
                                 <img src="{{url_for('static', filename='photos/' + blog.user.profile_pic_path) }}" alt="" class="rounded-circle article-img" style="border-radius: 50%; width: 100px;">
@@ -20,7 +20,7 @@
                             <!-- <a class="mr-2" href="#" style="color: aqua;" >{{ blog.user.username }}</a> -->
                         </div>
                         <h1><a class="article-title fw-bold" href="{{url_for('main.blog', blog_id=blog.id)}}"  style="color: white!important; font-size: 50px; font-weight: 500;">{{ blog.title }}</a></h1>
-                        <p class="article-content" style="font-size: 25px;" >{{ blog.post | truncate(150)}} <a href="{{url_for('main.blog', blog_id=blog.id)}}" style="color:cyan; font-size: 20px;"> [Read more]</a> </p>
+                        <p class="article-content" id="blog-post" style="font-size: 25px;" >{{ blog.post | truncate(150)}} <a href="{{url_for('main.blog', blog_id=blog.id)}}" style="color:cyan; font-size: 20px;"> [Read more]</a> </p>
                             <footer class="blockquote-footer text-center" style="color:cyan; font-size: 25px;"> Posted by: {{blog.user.username}} <br>
                                 <small class="text-muted" style="color:green !important; font-size: 20px;"> Date: {{ blog.date_posted.strftime('%Y-%m-%d') }}</small>
 
@@ -39,6 +39,8 @@
                                     </div>
                 
                                     <a href="{{url_for('main.comment',blog_id = blog.id)}}" class="btn btn-info btn-sm" style="height: 40px; width: 150px; font-size: 1.8rem;"> Comment</a>
+                                    <a href="{{url_for('main.edit_blog', blog_id=blog.id)}}"  class="btn btn-info btn-sm" style="height: 40px; width: 150px; font-size: 1.8rem;"> EDIT</a>
+
                                     <br>
                                     <hr style="background-color: white; height: 6px;">
                                     <hr style="background-color: navy; height: 6px;">
