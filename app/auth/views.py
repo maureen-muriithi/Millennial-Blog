@@ -17,7 +17,7 @@ def register():
         db.session.commit()
         flash("You have Successfully Signed up to the Millennal Blogs Website. Please login to proceed")
 
-        # mail_message("Welcome to MillennialBlogs","email/welcome_user",user.email,user=user)
+        mail_message("Welcome to MillennialBlogs","email/welcome_user",user.email,user=user)
 
 
         return redirect(url_for('auth.login'))
@@ -29,7 +29,6 @@ def login():
     title = "Millennial Blogs login"
     if login_form.validate_on_submit():
         user = User.query.filter_by(username = login_form.username.data).first()
-        flash("Welcome to Millenial Blogs")
         if user != None and user.verify_password(login_form.password.data):
             login_user(user,login_form.remember.data)
             return redirect(request.args.get('next') or url_for('main.index'))
